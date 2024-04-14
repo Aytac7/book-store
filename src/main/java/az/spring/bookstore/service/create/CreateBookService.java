@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class CreateBookService {
 
     private final BookRepository bookRepository;
-    private final BookEntity bookEntity;
+  //  private final BookEntity bookEntity;
     private final BookMapper bookMapper;
 
     public CreateBookResponse saveBook(CreateBookRequest createBookRequest){
