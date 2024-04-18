@@ -4,13 +4,12 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.internal.constraintvalidators.hv.UniqueElementsValidator;
 
 import java.lang.annotation.*;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueElementsValidator.class)
+@Constraint(validatedBy = UniqueNameValidator.class)
 @Size(min = 3,message = " Length of name must be at least 3 characters")
 @NotBlank(message = "Please enter name")
 @Documented

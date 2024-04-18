@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
@@ -32,7 +32,6 @@ public class CreateUserRequest {
 
     LocalDate dateOfBirth;
 
-//    List<Long> books;
 
 
 }

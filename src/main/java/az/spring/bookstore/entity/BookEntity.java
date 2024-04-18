@@ -6,7 +6,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Entity
@@ -26,6 +25,12 @@ public class BookEntity {
     Integer numberOfPages;
     LocalDate publicationDate;
 
+    @Column(name = "fk_user_id")
+    Long fkUserId;
+
+    @Column(name="fk_library_id")
+    Long fkLibraryId;
+
     @CreationTimestamp
     LocalDate createdAt;
 
@@ -33,11 +38,7 @@ public class BookEntity {
     LocalDate updatedAt;
 
 
-    //@Column(name = "user_id")
-     Long userId;
 
-    //@Column(name="library_id")
-     Long libraryId;
 
 
 

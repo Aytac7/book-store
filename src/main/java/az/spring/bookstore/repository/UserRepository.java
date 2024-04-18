@@ -17,4 +17,9 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
             where u.status='A'
 """)
     List<UserWrapper> findByUserStatusA();
+    UserEntity findByName(String name);
+
+//    @Query("select u from UserEntity where u.status = 'A'")
+//    //@Query(value = "select * from UserEntity where status = 'A'", nativeQuery = true)
+//    List<UserEntity> findByStatus();
 }

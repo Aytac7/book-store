@@ -1,22 +1,37 @@
 package az.spring.bookstore.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
-import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name="library")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class LibraryEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long id;
     String name;
+    String title;
+    String status;
 
 
-    Long userId;
-    Long bookId;
+    @Column(name = "fk_user_id")
+    String fkUserId;
 
+    @Column(name="fk_book_id")
+    String fkBookId;
+
+    @PrePersist
+    public void prePersist(){
+        if(status==null){
+            status="C";
+        }
+    }
 }
