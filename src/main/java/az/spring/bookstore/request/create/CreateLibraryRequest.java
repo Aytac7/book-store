@@ -9,12 +9,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class CreateLibraryRequest {
     @NotBlank
     String name;
     String title;
     @NotBlank(message = "Please enter userId")
     String fkUserId;
-    @NotBlank(message = "Please enter bookId")
-    String fkBookId;
 }
