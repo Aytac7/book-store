@@ -1,4 +1,4 @@
-package az.spring.bookstore.service.read;
+package az.spring.bookstore.service.read.userRead;
 
 import az.spring.bookstore.entity.UserEntity;
 import az.spring.bookstore.mapper.UserMapper;
