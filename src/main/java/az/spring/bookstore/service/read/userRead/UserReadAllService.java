@@ -1,4 +1,4 @@
-package az.spring.bookstore.service.read;
+package az.spring.bookstore.service.read.userRead;
 
 import az.spring.bookstore.repository.UserRepository;
 import az.spring.bookstore.wrapper.UserWrapper;
