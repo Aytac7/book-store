@@ -3,14 +3,12 @@ package az.spring.bookstore.exception.handler;
 import az.spring.bookstore.exception.*;
 import az.spring.bookstore.exception.error.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -79,6 +77,55 @@ public class CustomerException  {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlerIdNotFoundException (Exception exception){
         log.info("Id not found: {}", exception.getMessage());
+        return ErrorResponse.builder()
+                .code(HttpStatus.BAD_REQUEST.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(BookNotFoundException.class)
+    @ResponseStatus(NOT_FOUND)
+    public ErrorResponse handlerBookNotFoundException (Exception exception){
+        log.info("Book not found: {}", exception.getMessage());
+        return ErrorResponse.builder()
+                .code(HttpStatus.NOT_FOUND.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(LibraryAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handlerLibraryAlreadyExistsException(Exception exception){
+        log.info("Library already exists: {}", exception.getMessage());
+        return ErrorResponse.builder()
+                .code(HttpStatus.CONFLICT.name())
+                .message(exception.getMessage())
+                .build();
+    }
+    @ExceptionHandler(BookAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handlerBookAlreadyExistsException(Exception exception){
+        log.info("Book already exists: {}", exception.getMessage());
+        return ErrorResponse.builder()
+                .code(HttpStatus.CONFLICT.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerUnauthorizedAccessException(Exception exception){
+        log.info("UnauthorizedAccessException", exception.getMessage());
+        return ErrorResponse.builder()
+                .code(HttpStatus.BAD_REQUEST.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(LibraryNotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerLibraryNotFoundException(Exception exception){
+        log.info("LibraryNotFoundException", exception.getMessage());
         return ErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.name())
                 .message(exception.getMessage())
