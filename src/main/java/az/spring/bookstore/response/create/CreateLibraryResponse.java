@@ -8,11 +8,12 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level=AccessLevel.PRIVATE)
+@Builder
 public class CreateLibraryResponse {
     Long id;
     String name;
     String title;
     String fkUserId;
-    String fkBookId;
+    Long fkBookId;
     String status;
 }

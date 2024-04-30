@@ -15,6 +15,6 @@ public class LibraryReadResponse {
     String name;
     String title;
     String fkUserId;
-    String fkBookId;
+    Long fkBookId;
     String status;
 }
