@@ -1,9 +1,7 @@
 package az.spring.bookstore.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 
@@ -12,6 +10,9 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @Table(name="library")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LibraryEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class LibraryEntity {
     String fkUserId;
 
     @Column(name="fk_book_id")
-    String fkBookId;
+    Long fkBookId;
 
     @PrePersist
     public void prePersist(){
