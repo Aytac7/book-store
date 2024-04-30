@@ -1,20 +1,24 @@
 package az.spring.bookstore.request.create;
 
 import az.spring.bookstore.constraint.validation.UniqueName;
+import az.spring.bookstore.enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
+@Builder
 public class CreateUserRequest {
+
     @UniqueName
     String name;
 
@@ -31,8 +35,9 @@ public class CreateUserRequest {
     String password;
 
     LocalDate dateOfBirth;
+    UserRole userRole;
 
-//    List<Long> books;
+
 
 
 }

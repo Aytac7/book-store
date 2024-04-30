@@ -1,21 +1,18 @@
 package az.spring.bookstore.entity;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import az.spring.bookstore.enums.UserRole;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDate;
-import java.util.List;
-
 @Data
 @Entity
 @Table(name = "all_users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +25,15 @@ public class UserEntity {
     String address;
     String status;
     String password;
+    @Enumerated(EnumType.STRING)
+    UserRole userRole;
     LocalDate dateOfBirth;
+
+
+
+
+    @Column(name = "fk_library_id")
+    private String fkLibraryId;
 
     @CreationTimestamp
     LocalDate createdAt;
@@ -36,10 +41,14 @@ public class UserEntity {
     @UpdateTimestamp
     LocalDate updatedAt;
 
+    @PrePersist
+    public void pre(){
+        if(status==null){
+            status="C";
+        }
+    }
 
-    private Long bookId;
 
-    //@OneToOne(mappedBy = "userId")
-    private Long libraryId;
+
 
 }
