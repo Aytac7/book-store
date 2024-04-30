@@ -1,13 +1,11 @@
 package az.spring.bookstore.controller;
-import az.spring.bookstore.entity.UserEntity;
-import az.spring.bookstore.exception.UserNotFoundException;
-import az.spring.bookstore.mapper.UserMapper;
-import az.spring.bookstore.repository.UserRepository;
 import az.spring.bookstore.request.create.CreateUserRequest;
 import az.spring.bookstore.response.create.CreateUserResponse;
 import az.spring.bookstore.service.create.CreateUserService;
-import az.spring.bookstore.service.read.GetAllUserService;
-import az.spring.bookstore.service.read.UserReadAllService;
+import az.spring.bookstore.service.delete.UserDelete.UserDeleteService;
+import az.spring.bookstore.service.read.userRead.GetAllUserService;
+import az.spring.bookstore.service.read.userRead.UserReadAllService;
+import az.spring.bookstore.service.update.UserUpdate.UserUpdateService;
 import az.spring.bookstore.wrapper.UserWrapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +22,8 @@ public class UserController {
     private  final GetAllUserService getAllUserService;
     private final CreateUserService createUserService;
     private final UserReadAllService userReadAllService;
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    private final UserUpdateService userUpdateService;
+    private final UserDeleteService userDeleteService;
 
 
     @PostMapping("/create")
@@ -45,18 +43,15 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PutMapping
-    public CreateUserResponse update(Long id, CreateUserRequest userRequest){
-        UserEntity userEntity=userRepository.findById(id).orElseThrow(()->new UserNotFoundException(HttpStatus.NOT_FOUND.name(),"not found user: "));
-        userMapper.mapForUpdate(userEntity,userRequest);
-        userRepository.save(userEntity);
-        return userMapper.mapToUserResponse(userEntity);
+    @PutMapping("/{id}")
+    public CreateUserResponse update( @PathVariable Long id, @RequestBody CreateUserRequest userRequest){
+       return userUpdateService.update(id,userRequest);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void delete(@RequestParam Long id){
-       userRepository.deleteById(id);
+       userDeleteService.delete(id);
     }
 
 }
