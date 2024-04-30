@@ -1,5 +1,6 @@
 package az.spring.bookstore.repository;
 
+import az.spring.bookstore.entity.LibraryEntity;
 import az.spring.bookstore.wrapper.UserWrapper;
 import az.spring.bookstore.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,8 +19,7 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
 """)
     List<UserWrapper> findByUserStatusA();
     UserEntity findByName(String name);
+    UserEntity findByFkLibraryId(String fkLibraryId);
 
-//    @Query("select u from UserEntity where u.status = 'A'")
-//    //@Query(value = "select * from UserEntity where status = 'A'", nativeQuery = true)
-//    List<UserEntity> findByStatus();
+
 }
