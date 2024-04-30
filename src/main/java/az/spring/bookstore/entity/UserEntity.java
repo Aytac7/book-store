@@ -1,7 +1,7 @@
 package az.spring.bookstore.entity;
+import az.spring.bookstore.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +10,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "all_users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +25,12 @@ public class UserEntity {
     String address;
     String status;
     String password;
+    @Enumerated(EnumType.STRING)
+    UserRole userRole;
     LocalDate dateOfBirth;
 
-    @Column(name="fk_book_id")
-    private String fkBookId;
+
+
 
     @Column(name = "fk_library_id")
     private String fkLibraryId;
